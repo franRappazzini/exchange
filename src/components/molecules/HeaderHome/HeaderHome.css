@@ -1,0 +1,16 @@
+.header__home {
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #181a20;
+}
+
+.ul__navbar-home {
+  list-style: none;
+  display: flex;
+}
+
+.ul__navbar-home li {
+  margin: 0 1rem 0 1rem;
+}
