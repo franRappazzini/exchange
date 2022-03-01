@@ -3,7 +3,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #181a20;
+  background-color: #1e1e1e;
+}
+
+.header__main a {
+  text-decoration: none;
 }
 
 .ul__navbar {
@@ -12,5 +16,5 @@
 }
 
 .ul__navbar li {
-  margin: 0 1rem 0 1rem;
+  margin: 0 0.5rem 0 0.5rem;
 }

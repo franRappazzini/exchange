@@ -1,0 +1,17 @@
+.main__porfolio a {
+  text-decoration: none;
+}
+
+.main__porfolio p {
+  margin: 0;
+}
+
+.dinero__container {
+  display: flex;
+  align-items: center;
+}
+
+.portfolio__container {
+  display: flex;
+  align-items: flex-start;
+}

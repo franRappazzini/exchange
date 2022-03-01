@@ -1,18 +1,29 @@
 import "./HeaderHome.css";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+import { Button } from "@mui/material";
 import React from "react";
 
 function HeaderHome() {
   return (
     <header className="header__home">
-      <h1>Header</h1>
-
+      <Link to="/">
+        <h1>Header</h1>
+      </Link>
       <nav>
         <ul className="ul__navbar-home">
-          <li>Registrarse</li>
           <li>
-            <Link to="/portfolio">Ingresar</Link>
+            <NavLink to="/">
+              <Button variant="contained" color="secondary">
+                Registrarse
+              </Button>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/portfolio">
+              <Button color="secondary">Ingresar</Button>
+            </NavLink>
           </li>
         </ul>
       </nav>

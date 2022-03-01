@@ -1,0 +1,10 @@
+.toggleBtns__container {
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tables__container {
+  display: flex;
+  justify-content: center;
+}

@@ -1,16 +1,20 @@
-import { Card, CardActions, CardContent, CardHeader } from "@mui/material";
+import "./Portfolio.css";
 
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Header from "../../components/molecules/Header/Header";
+import { Link } from "react-router-dom";
 import React from "react";
+import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
+import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
+import pieChart from "../../assets/svg/Group 1.svg";
 
 function Portfolio() {
   return (
     <>
       <Header />
 
-      <main>
+      <main className="main__porfolio">
         <ButtonGroup
           variant="outlined"
           aria-label="button group"
@@ -21,29 +25,20 @@ function Portfolio() {
           }}
         >
           <Button color="primary">Ingreso de dinero</Button>
-          <Button color="success" variant="contained" sx={{ width: "20rem" }}>
-            INVERTIR
-          </Button>
+          <Link to="/operar">
+            <Button color="success" variant="contained" sx={{ width: "20rem" }}>
+              INVERTIR
+            </Button>
+          </Link>
           <Button color="error">Retiro de dinero</Button>
         </ButtonGroup>
 
-        <Card
-          variant="outlined"
-          sx={{ maxWidth: "60%", backgroundColor: "#181a20" }}
-        >
-          <CardHeader title="Saldo actual" />
+        <SaldoActual dineroDisponible={1000} inversiones={100000} />
 
-          <CardContent
-            sx={{ display: "flex", justifyContent: "space-between" }}
-          >
-            <p>Dinero disponible: $1.000</p>
-            <p>Mis inversiones: $100.000</p>
-            <p>Total: $101.000</p>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
+        <section className="portfolio__container">
+          <TablePortfolio />
+          <img src={pieChart} alt="pie" width={350} />
+        </section>
       </main>
     </>
   );

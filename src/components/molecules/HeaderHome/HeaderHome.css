@@ -3,7 +3,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #181a20;
+  background-color: #1e1e1e;
+}
+
+.header__home a {
+  text-decoration: none;
 }
 
 .ul__navbar-home {
@@ -12,5 +16,5 @@
 }
 
 .ul__navbar-home li {
-  margin: 0 1rem 0 1rem;
+  margin: 0 0.5rem;
 }

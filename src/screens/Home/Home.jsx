@@ -3,7 +3,6 @@ import "./Home.css";
 import { AdvancedChart, MarketOverview, Ticker } from "react-tradingview-embed";
 import { symbols, tabs, tabsCrypto } from "../../utils/constants/stockData";
 
-import BtnCustom from "../../components/atoms/BtnCustom/BtnCustom";
 import { Button } from "@mui/material";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import React from "react";
@@ -26,7 +25,7 @@ function Home() {
           <Button
             variant="contained"
             color="secondary"
-            sx={{ "margin-bottom": "1rem" }}
+            sx={{ marginBottom: "1rem", width: "fit-content" }}
           >
             Registrarse
           </Button>
