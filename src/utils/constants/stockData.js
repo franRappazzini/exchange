@@ -12,12 +12,35 @@ export const symbols = [
     proName: "GOOG",
   },
   {
+    description: "Amazon",
+    proName: "AMZN",
+  },
+  {
+    description: "Facebook",
+    proName: "FB",
+  },
+];
+
+export const symbolsCripto = [
+  {
     description: "Bitcoin",
     proName: "BTCUSD",
   },
   {
     description: "Ethereum",
     proName: "ETHUSD",
+  },
+  {
+    description: "Terra",
+    proName: "LUNAUSD",
+  },
+  {
+    description: "Polkadot",
+    proName: "DOTUSD",
+  },
+  {
+    description: "Solana",
+    proName: "SOLUSD",
   },
 ];
 
@@ -48,6 +71,7 @@ export const tabs = [
     ],
   },
 ];
+
 export const tabsCrypto = [
   {
     title: "Acciones",

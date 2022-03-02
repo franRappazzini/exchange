@@ -160,9 +160,9 @@ function TablePortfolio() {
   ];
 
   return (
-    <Card sx={{ margin: "1rem 0" }}>
+    <Card sx={{ margin: "1rem 0" }} elevation="1">
       <CardHeader title="Portfolio" />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation="1">
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
           <TableHead>
             <TableRow>

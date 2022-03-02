@@ -1,7 +1,16 @@
 import "./Home.css";
 
-import { AdvancedChart, MarketOverview, Ticker } from "react-tradingview-embed";
-import { symbols, tabs, tabsCrypto } from "../../utils/constants/stockData";
+import {
+  AdvancedChart,
+  MarketOverview,
+  TickerTape,
+} from "react-tradingview-embed";
+import {
+  symbols,
+  symbolsCripto,
+  tabs,
+  tabsCrypto,
+} from "../../utils/constants/stockData";
 
 import { Button } from "@mui/material";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
@@ -30,12 +39,22 @@ function Home() {
             Registrarse
           </Button>
 
-          <Ticker
-            widgetProps={{
-              symbols: symbols,
-              locale: "es",
-            }}
-          />
+          <section className="tickerTape__container">
+            <div>
+              <TickerTape
+                widgetProps={{
+                  symbols: symbols,
+                  locale: "es",
+                }}
+              />
+            </div>
+            <TickerTape
+              widgetProps={{
+                symbols: symbolsCripto,
+                locale: "es",
+              }}
+            />
+          </section>
         </section>
 
         <section className="section__2">
@@ -115,6 +134,7 @@ function Home() {
               locale: "es",
               symbol: "NASDAQ:AAPL",
               interval: "W",
+              range: 1000,
               style: "1",
             }}
           />

@@ -5,7 +5,7 @@ import React from "react";
 
 function SaldoActual({ dineroDisponible, inversiones }) {
   return (
-    <Card sx={{ maxWidth: "60%" }}>
+    <Card sx={{ maxWidth: "60%" }} elevation="1">
       <CardHeader title="Saldo actual" />
 
       <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>

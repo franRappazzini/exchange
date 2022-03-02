@@ -11,6 +11,10 @@
   height: 100vh;
 }
 
+.tickerTape__container div {
+  margin-bottom: 1rem;
+}
+
 .section__1 h1 {
   font-size: 2.5rem;
   margin-bottom: 0;
