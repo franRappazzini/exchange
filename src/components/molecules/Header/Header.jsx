@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import { Logout, Settings } from "@mui/icons-material";
 
 import React from "react";
 
@@ -25,7 +25,7 @@ function Header() {
 
   return (
     <header className="header__main">
-      <Link to="/">
+      <Link to="/portfolio">
         <h1>Header</h1>
       </Link>
 
@@ -52,7 +52,6 @@ function Header() {
             </NavLink>
           </li>
           <li>
-            {/* <NavLink to="/"> */}
             <Button
               onClick={(e) => {
                 handleClick(e);
@@ -60,7 +59,6 @@ function Header() {
             >
               Mi cuenta
             </Button>
-            {/* </NavLink> */}
 
             <Menu
               anchorEl={anchorEl}
@@ -96,10 +94,12 @@ function Header() {
               }}
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-              // elevation="24"
+              className="header__menu"
             >
               <MenuItem>
-                <Avatar /> Cuenta
+                <Link to="/mi_cuenta">
+                  <Avatar /> Cuenta
+                </Link>
               </MenuItem>
               <Divider />
               <MenuItem>
@@ -109,10 +109,12 @@ function Header() {
                 Configuracion
               </MenuItem>
               <MenuItem>
-                <ListItemIcon>
-                  <Logout fontSize="small" />
-                </ListItemIcon>
-                Salir
+                <Link to="/">
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Salir
+                </Link>
               </MenuItem>
             </Menu>
           </li>

@@ -15,14 +15,12 @@ function HeaderHome() {
         <ul className="ul__navbar-home">
           <li>
             <NavLink to="/">
-              <Button variant="contained" color="secondary">
-                Registrarse
-              </Button>
+              <Button variant="contained">Registrarse</Button>
             </NavLink>
           </li>
           <li>
             <NavLink to="/portfolio">
-              <Button color="secondary">Ingresar</Button>
+              <Button>Ingresar</Button>
             </NavLink>
           </li>
         </ul>

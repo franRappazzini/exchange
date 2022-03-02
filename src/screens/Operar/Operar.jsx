@@ -5,6 +5,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import Header from "../../components/molecules/Header/Header";
 import { MarketOverview } from "react-tradingview-embed";
+import TableCripto from "../../components/molecules/TableCripto/TableCripto";
 import { tabsCrypto } from "../../utils/constants/stockData";
 
 function Operar() {
@@ -30,6 +31,8 @@ function Operar() {
             <ToggleButton value="cripto">Cripto</ToggleButton>
           </ToggleButtonGroup>
         </div>
+
+        <TableCripto />
 
         <section className="tables__container">
           {alignment === "acciones" ? (

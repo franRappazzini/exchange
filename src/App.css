@@ -8,3 +8,16 @@ li {
 main {
   padding: 0 2rem;
 }
+
+::-webkit-scrollbar {
+  width: 0.3rem;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(235, 235, 235);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}

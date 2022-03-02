@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Graficos from "./screens/Graficos/Graficos";
 import Home from "./screens/Home/Home";
+import MiCuenta from "./screens/MiCuenta/MiCuenta";
 import Operar from "./screens/Operar/Operar";
 import Portfolio from "./screens/Portfolio/Portfolio";
 
@@ -26,6 +27,8 @@ function App() {
           <Route path="/operar" element={<Operar />} />
 
           <Route path="/graficos" element={<Graficos />} />
+
+          <Route path="/mi_cuenta" element={<MiCuenta />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
