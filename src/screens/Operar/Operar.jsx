@@ -4,12 +4,11 @@ import React, { useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import Header from "../../components/molecules/Header/Header";
-import { MarketOverview } from "react-tradingview-embed";
+import TableAcciones from "../../components/molecules/TableAcciones/TableAcciones";
 import TableCripto from "../../components/molecules/TableCripto/TableCripto";
-import { tabsCrypto } from "../../utils/constants/stockData";
 
 function Operar() {
-  const [alignment, setAlignment] = useState("acciones");
+  const [alignment, setAlignment] = useState("cripto");
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -27,25 +26,12 @@ function Operar() {
             exclusive
             onChange={handleChange}
           >
-            <ToggleButton value="acciones">Acciones</ToggleButton>
             <ToggleButton value="cripto">Cripto</ToggleButton>
+            <ToggleButton value="acciones">Acciones</ToggleButton>
           </ToggleButtonGroup>
         </div>
 
-        <TableCripto />
-
-        <section className="tables__container">
-          {alignment === "acciones" ? (
-            <MarketOverview />
-          ) : (
-            <MarketOverview
-              widgetProps={{
-                tabs: tabsCrypto,
-                locale: "es",
-              }}
-            />
-          )}
-        </section>
+        {alignment === "cripto" ? <TableCripto /> : <TableAcciones />}
       </main>
     </>
   );

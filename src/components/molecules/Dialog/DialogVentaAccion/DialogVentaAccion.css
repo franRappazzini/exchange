@@ -1,0 +1,10 @@
+.datos__accion--venta {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.datos__accion--venta h1 {
+  /* font-size: 2rem; */
+  color: #f44336;
+}

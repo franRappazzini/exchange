@@ -1,0 +1,10 @@
+.datos__cripto--venta {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.datos__cripto--venta h1 {
+  /* font-size: 2rem; */
+  color: #f44336;
+}
