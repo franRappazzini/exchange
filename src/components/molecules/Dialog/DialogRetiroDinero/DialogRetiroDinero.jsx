@@ -1,4 +1,4 @@
-import "./DialogIngresarDinero.css";
+import "../DialogIngresarDinero/DialogIngresarDinero.css";
 
 import {
   Button,
@@ -12,10 +12,10 @@ import {
 
 import React from "react";
 
-function DialogIngresarDinero({ open, setOpen }) {
+function DialogRetiroDinero({ open, setOpen }) {
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle sx={{ m: "2rem 3rem 0 3rem" }}>Ingresar dinero</DialogTitle>
+      <DialogTitle sx={{ m: "2rem 3rem 0 3rem" }}>Retirar dinero</DialogTitle>
       <DialogContent
         sx={{
           display: "flex",
@@ -29,7 +29,7 @@ function DialogIngresarDinero({ open, setOpen }) {
         </section>
         <TextField
           id="filled-basic"
-          label="Cantidad a ingresar"
+          label="Cantidad a retirar"
           variant="filled"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
@@ -40,7 +40,7 @@ function DialogIngresarDinero({ open, setOpen }) {
         <section className="btns__container">
           <Button
             variant="contained"
-            color="success"
+            color="primary"
             sx={{ marginTop: "1rem" }}
           >
             Confirmar
@@ -58,4 +58,4 @@ function DialogIngresarDinero({ open, setOpen }) {
   );
 }
 
-export default DialogIngresarDinero;
+export default DialogRetiroDinero;

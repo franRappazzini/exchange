@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import DialogIngresarDinero from "../../components/molecules/Dialog/DialogIngresarDinero/DialogIngresarDinero";
+import DialogRetiroDinero from "../../components/molecules/Dialog/DialogRetiroDinero/DialogRetiroDinero";
 import Header from "../../components/molecules/Header/Header";
 import { Link } from "react-router-dom";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
@@ -13,6 +14,7 @@ import pieChart from "../../assets/svg/Group 1.svg";
 
 function Portfolio() {
   const [open, setOpen] = useState(false);
+  const [openRetiro, setOpenRetiro] = useState(false);
 
   return (
     <>
@@ -36,7 +38,9 @@ function Portfolio() {
               INVERTIR
             </Button>
           </Link>
-          <Button color="error">Retiro de dinero</Button>
+          <Button color="error" onClick={() => setOpenRetiro(true)}>
+            Retiro de dinero
+          </Button>
         </ButtonGroup>
 
         <SaldoActual dineroDisponible={1000} inversiones={100000} />
@@ -47,6 +51,7 @@ function Portfolio() {
         </section>
 
         <DialogIngresarDinero open={open} setOpen={setOpen} />
+        <DialogRetiroDinero open={openRetiro} setOpen={setOpenRetiro} />
       </main>
     </>
   );

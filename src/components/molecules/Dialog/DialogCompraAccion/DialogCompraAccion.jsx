@@ -95,7 +95,7 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
               </Typography>
             </div>
 
-            <div className="btns__container">
+            <div className="btns__container-accion">
               <Button variant="contained" color="success">
                 Confirmar
               </Button>

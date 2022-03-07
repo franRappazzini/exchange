@@ -56,7 +56,7 @@
   width: 80%;
 }
 
-.btns__container {
+.btns__container-cripto {
   display: flex;
   justify-content: space-between;
   margin: 1rem 0;

@@ -102,7 +102,7 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
               </Typography>
             </div>
 
-            <div className="btns__container">
+            <div className="btns__container-cripto">
               <Button variant="contained" color="error">
                 Confirmar
               </Button>

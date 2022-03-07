@@ -100,8 +100,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
                 {(cantidad / current_price).toFixed(8)} {symbol.toUpperCase()}
               </Typography>
             </div>
-
-            <div className="btns__container">
+            <div className="btns__container-cripto">
               <Button variant="contained" color="success">
                 Confirmar
               </Button>
