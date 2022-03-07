@@ -14,6 +14,7 @@ import {
 
 import { Button } from "@mui/material";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
+import { Link } from "react-router-dom";
 import React from "react";
 import creditCard from "../../assets/svg/credit_card.svg";
 import discount from "../../assets/svg/discount.svg";
@@ -31,12 +32,14 @@ function Home() {
             Invertí y obtené rendimientos a largo plazo con las empresas más
             importantes del mundo y las crypto del momento.
           </p>
-          <Button
-            variant="contained"
-            sx={{ marginBottom: "1rem", width: "fit-content" }}
-          >
-            Registrarse
-          </Button>
+          <Link to="/registrarse">
+            <Button
+              variant="contained"
+              sx={{ marginBottom: "1rem", width: "fit-content" }}
+            >
+              Registrarse
+            </Button>
+          </Link>
 
           <section className="tickerTape__container">
             <div>
@@ -91,7 +94,9 @@ function Home() {
               del mercado durante las 24 horas del día. Nunca habia sido tan
               facil como con StockApp.
             </p>
-            <Button variant="contained">Registrarse</Button>
+            <Link to="/registrarse">
+              <Button variant="contained">Registrarse</Button>
+            </Link>
           </div>
 
           <img src={creditCard} alt="credit card" width={350} />
@@ -104,7 +109,9 @@ function Home() {
               Si, leiste bien. El primer broker/exchange que no te cobra NADA
               por ingresar/retirar dinero o comprar/vender cualquier activo.
             </p>
-            <Button variant="contained">Comprar sin comision</Button>
+            <Link to="/registrarse">
+              <Button variant="contained">Comprar sin comision</Button>
+            </Link>
           </div>
           <img src={discount} alt="discount" width={350} />
         </section>
@@ -117,7 +124,9 @@ function Home() {
               tanto de mercado en cualquier momento desde nuestra plataforma.
             </p>
 
-            <Button variant="contained">Registrarse</Button>
+            <Link to="/registrarse">
+              <Button variant="contained">Registrarse</Button>
+            </Link>
           </div>
 
           <AdvancedChart
@@ -139,7 +148,10 @@ function Home() {
           <div>
             <h1>Portfolio detallado</h1>
             <p>Consulta tu portolio personal con hasta el ultimo detalle.</p>
-            <Button variant="contained">Registrarse</Button>
+
+            <Link to="/registrarse">
+              <Button variant="contained">Registrarse</Button>
+            </Link>
           </div>
 
           <img src={statisticChart} alt="statistic chart" width={350} />
@@ -149,16 +161,20 @@ function Home() {
           <h1>Que estas esperando?</h1>
           <p>Comenza ya mismo a generar ganancias.</p>
           <div>
-            <Button variant="contained" sx={{ margin: "0 0.5rem" }}>
-              Registrarse
-            </Button>
-            <Button
-              variant="contained"
-              color="inherit"
-              sx={{ margin: "0 0.5rem" }}
-            >
-              Ingresar
-            </Button>
+            <Link to="/registrarse">
+              <Button variant="contained" sx={{ margin: "0 0.5rem" }}>
+                Registrarse
+              </Button>
+            </Link>
+            <Link to="/">
+              <Button
+                variant="contained"
+                color="inherit"
+                sx={{ margin: "0 0.5rem" }}
+              >
+                Ingresar
+              </Button>
+            </Link>
           </div>
         </section>
       </main>

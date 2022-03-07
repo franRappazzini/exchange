@@ -5,9 +5,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Graficos from "./screens/Graficos/Graficos";
 import Home from "./screens/Home/Home";
+import Ingresar from "./screens/Ingresar/Ingresar";
 import MiCuenta from "./screens/MiCuenta/MiCuenta";
 import Operar from "./screens/Operar/Operar";
 import Portfolio from "./screens/Portfolio/Portfolio";
+import Registrarse from "./screens/Registrarse/Registrarse";
 
 function App() {
   const darkTheme = createTheme({
@@ -21,6 +23,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+
+          <Route path="/registrarse" element={<Registrarse />} />
+
+          <Route path="/ingresar" element={<Ingresar />} />
 
           <Route path="/portfolio" element={<Portfolio />} />
 

@@ -14,12 +14,12 @@ function HeaderHome() {
       <nav>
         <ul className="ul__navbar-home">
           <li>
-            <NavLink to="/">
+            <NavLink to="/registrarse">
               <Button variant="contained">Registrarse</Button>
             </NavLink>
           </li>
           <li>
-            <NavLink to="/portfolio">
+            <NavLink to="/ingresar">
               <Button>Ingresar</Button>
             </NavLink>
           </li>

@@ -1,0 +1,27 @@
+.main__registrarse {
+  display: flex;
+  justify-content: center;
+}
+
+.form__registrarse {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+}
+
+.form__registrarse input {
+  width: 15rem;
+}
+
+.eyeIcon:hover {
+  cursor: pointer;
+}
+
+.main__registrarse p {
+  margin: 1rem 0 0 0;
+}
+
+.main__registrarse p a {
+  color: #90caf9;
+  text-decoration: none;
+}

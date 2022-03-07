@@ -1,15 +1,19 @@
 import "./Portfolio.css";
 
+import React, { useState } from "react";
+
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import DialogIngresarDinero from "../../components/molecules/Dialog/DialogIngresarDinero/DialogIngresarDinero";
 import Header from "../../components/molecules/Header/Header";
 import { Link } from "react-router-dom";
-import React from "react";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
 import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
 import pieChart from "../../assets/svg/Group 1.svg";
 
 function Portfolio() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <Header />
@@ -24,7 +28,9 @@ function Portfolio() {
             margin: "1rem 0",
           }}
         >
-          <Button color="primary">Ingreso de dinero</Button>
+          <Button color="primary" onClick={() => setOpen(true)}>
+            Ingreso de dinero
+          </Button>
           <Link to="/operar">
             <Button color="success" variant="contained" sx={{ width: "20rem" }}>
               INVERTIR
@@ -39,6 +45,8 @@ function Portfolio() {
           <TablePortfolio />
           <img src={pieChart} alt="pie" width={350} />
         </section>
+
+        <DialogIngresarDinero open={open} setOpen={setOpen} />
       </main>
     </>
   );
