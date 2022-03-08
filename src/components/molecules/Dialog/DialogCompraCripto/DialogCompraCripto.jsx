@@ -2,7 +2,7 @@ import "./DialogCompraCripto.css";
 
 import * as React from "react";
 
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Button, InputAdornment, Link, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
@@ -29,7 +29,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
 
   function handleConfirmar() {
     setConfirmar(false);
-    setOpen(false);
+    handleClose();
     dispatch(
       comprarCripto(
         usuario.id,
@@ -52,6 +52,17 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
             </div>
 
             <p>${new Intl.NumberFormat().format(current_price)}</p>
+            <p>
+              <Link
+                href={`https://www.coingecko.com/en/coins/${id}`}
+                title="CoinGecko"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ fontSize: "0.9rem" }}
+              >
+                Ver mas info.
+              </Link>
+            </p>
           </section>
 
           <section className="compra__container">

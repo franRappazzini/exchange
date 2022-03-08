@@ -2,12 +2,13 @@ import "./DialogCompraAccion.css";
 
 import * as React from "react";
 
-import { Button, InputAdornment, Skeleton, TextField } from "@mui/material";
+import { Button, InputAdornment, Link, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
+import { comprarAccion } from "../../../../redux/actions/ActivosAction";
 import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
 
 export default function DialogCompraAccion({ accion, open, setOpen }) {
@@ -26,6 +27,14 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
     setOpen(false);
   };
 
+  function handleConfirmar() {
+    setConfirmar(false);
+    handleClose();
+    dispatch(
+      comprarAccion(usuario.id, accion, cantidad / price, saldo, cantidad)
+    );
+  }
+
   return (
     <>
       <Dialog onClose={handleClose} open={open} maxWidth="sm" fullWidth="100%">
@@ -33,6 +42,17 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
           <section className="accion__container">
             <h1>{symbol}</h1>
             <p>${new Intl.NumberFormat().format(price)}</p>
+            <p>
+              <Link
+                href={`https://finance.yahoo.com/quote/${symbol}?p=${symbol}&.tsrc=fin-srch`}
+                title="Yahoo Finance"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ fontSize: "0.9rem" }}
+              >
+                Ver mas info.
+              </Link>
+            </p>
           </section>
 
           <section className="compra__container">
@@ -103,7 +123,11 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
             </div>
 
             <div className="btns__container-accion">
-              <Button variant="contained" color="success">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={handleConfirmar}
+              >
                 Confirmar
               </Button>
               <Button

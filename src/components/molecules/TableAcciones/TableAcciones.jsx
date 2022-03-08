@@ -28,7 +28,6 @@ function TableAcciones() {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.table(data);
         setAcciones(data);
       })
       .catch((err) => console.log("ERROR:", err));

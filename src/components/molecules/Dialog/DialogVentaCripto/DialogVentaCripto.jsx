@@ -1,23 +1,57 @@
 import "./DialogVentaCripto.css";
 
 import { Button, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import React from "react";
 import Typography from "@mui/material/Typography";
+import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
+import { venderCripto } from "../../../../redux/actions/ActivosAction";
 
 function DialogVentaCripto({ cripto, open, setOpen }) {
   const [cantidad, setCantidad] = React.useState("");
   const [confirmar, setConfirmar] = React.useState(false);
-
   const { id, image, name, symbol, current_price } = cripto;
+  const usuario = useSelector((state) => state.user.usuario);
+  const dispatch = useDispatch();
 
-  const criptomonedas = 2;
+  React.useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleConfirmar() {
+    setConfirmar(false);
+    handleClose();
+    dispatch(
+      venderCripto(
+        usuario.id,
+        cripto,
+        cantidad,
+        usuario.saldo,
+        cantidad * current_price
+      )
+    );
+  }
+
+  function cantDisponibleCripto() {
+    const portfolioCripto = usuario.portfolio.cripto
+      ? Object.values(usuario.portfolio.cripto).map((c) => ({
+          ...c,
+        }))
+      : [];
+    const criptoFind = portfolioCripto.find((cripto) => cripto.id === id);
+    const cantCripto = criptoFind
+      ? parseFloat(criptoFind.cantidad).toFixed(8)
+      : 0;
+
+    return cantCripto;
+  }
 
   return (
     <>
@@ -36,8 +70,7 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
             <div>
               <Typography gutterBottom>Cantidad disponible:</Typography>
               <Typography gutterBottom>
-                {new Intl.NumberFormat().format(criptomonedas)}{" "}
-                {symbol.toUpperCase()}
+                {cantDisponibleCripto()} {symbol.toUpperCase()}
               </Typography>
             </div>
             <TextField
@@ -49,7 +82,7 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
               autoComplete="off"
-              error={cantidad > criptomonedas || cantidad < 0}
+              error={cantidad > cantDisponibleCripto() || cantidad < 0}
               sx={{ m: "1rem 0", width: "100%" }}
               autoFocus
             />
@@ -66,7 +99,7 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
               color="error"
               onClick={() => setConfirmar(true)}
               disabled={
-                cantidad > criptomonedas ||
+                cantidad > cantDisponibleCripto() ||
                 cantidad <= 0 ||
                 cantidad * current_price < 1
               }
@@ -103,7 +136,11 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
             </div>
 
             <div className="btns__container-cripto">
-              <Button variant="contained" color="error">
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleConfirmar}
+              >
                 Confirmar
               </Button>
               <Button variant="text" onClick={() => setConfirmar(false)}>
