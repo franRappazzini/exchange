@@ -2,12 +2,14 @@ import "./Registrarse.css";
 
 import { Button, Card, CardHeader, InputAdornment } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import InputForm from "../../components/atoms/InputForm/InputForm";
 import { Link } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { crearUsuario } from "../../redux/actions/UserAction";
 
 function Registrarse() {
   const [nuevoUsuario, setNuevoUsuario] = useState({
@@ -19,6 +21,8 @@ function Registrarse() {
     password2: "",
     verPassword: false,
   });
+  const usuarios = useSelector((state) => state.user.usuarios);
+  const dispatch = useDispatch();
 
   function handleChange(e) {
     setNuevoUsuario({
@@ -33,10 +37,35 @@ function Registrarse() {
       verPassword: !nuevoUsuario.verPassword,
     });
   }
-
+  console.log(usuarios);
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(nuevoUsuario);
+
+    const buscarUsuario = usuarios
+      ? usuarios.findIndex(
+          (user) =>
+            user.email === nuevoUsuario.email || user.dni === nuevoUsuario.dni
+        )
+      : -1;
+
+    console.log(buscarUsuario);
+
+    if (buscarUsuario === -1) {
+      if (nuevoUsuario.password === nuevoUsuario.password2) {
+        dispatch(crearUsuario(nuevoUsuario));
+        setNuevoUsuario({
+          nombres: "",
+          apellidos: "",
+          dni: "",
+          email: "",
+          password: "",
+          password2: "",
+          verPassword: false,
+        });
+      }
+    } else {
+      alert("El usuario ya existe");
+    }
   }
 
   function eyeIcon() {

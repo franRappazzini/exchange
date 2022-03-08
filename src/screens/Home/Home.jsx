@@ -5,22 +5,33 @@ import {
   MarketOverview,
   TickerTape,
 } from "react-tradingview-embed";
+import React, { useEffect } from "react";
 import {
   symbols,
   symbolsCripto,
   tabs,
   tabsCrypto,
 } from "../../utils/constants/stockData";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import { Link } from "react-router-dom";
-import React from "react";
 import creditCard from "../../assets/svg/credit_card.svg";
 import discount from "../../assets/svg/discount.svg";
+import { obtenerUsuarios } from "../../redux/actions/UserAction";
 import statisticChart from "../../assets/svg/statistic_chart.svg";
 
 function Home() {
+  const usuarios = useSelector((state) => state.user.usuarios);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(obtenerUsuarios());
+  }, [dispatch]);
+
+  console.log(usuarios);
+
   return (
     <>
       <HeaderHome />

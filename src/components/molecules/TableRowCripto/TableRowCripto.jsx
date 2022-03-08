@@ -8,8 +8,6 @@ function TableRowCripto({ cripto }) {
   const [open, setOpen] = useState(false);
   const [openVenta, setOpenVenta] = useState(false);
 
-  console.table(cripto);
-
   return (
     <>
       <TableRow key={cripto.id}>

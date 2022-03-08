@@ -9,10 +9,25 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import React, { useState } from "react";
 
-import React from "react";
+import { retirarDinero } from "../../../../redux/actions/UserAction";
+import { useDispatch } from "react-redux";
 
-function DialogRetiroDinero({ open, setOpen }) {
+function DialogRetiroDinero({ open, setOpen, usuario }) {
+  const [monto, setMonto] = useState("");
+  const dispatch = useDispatch();
+
+  const saldoActual = usuario.saldo ? usuario.saldo : 0;
+
+  function handleConfirmar() {
+    if (monto >= 1) {
+      dispatch(retirarDinero(usuario.id, monto, saldoActual));
+      setOpen(false);
+      setMonto("");
+    }
+  }
+
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
       <DialogTitle sx={{ m: "2rem 3rem 0 3rem" }}>Retirar dinero</DialogTitle>
@@ -25,16 +40,20 @@ function DialogRetiroDinero({ open, setOpen }) {
       >
         <section className="saldo__container">
           <Typography gutterBottom>Dinero disponible:</Typography>
-          <Typography gutterBottom>$xxx</Typography>
+          <Typography gutterBottom>
+            ${new Intl.NumberFormat().format(saldoActual)}
+          </Typography>
         </section>
         <TextField
-          id="filled-basic"
           label="Cantidad a retirar"
           variant="filled"
+          type="number"
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           sx={{ width: "20rem" }}
+          value={monto}
+          onChange={(e) => setMonto(parseFloat(e.target.value))}
         />
 
         <section className="btns__container">
@@ -42,6 +61,8 @@ function DialogRetiroDinero({ open, setOpen }) {
             variant="contained"
             color="primary"
             sx={{ marginTop: "1rem" }}
+            onClick={handleConfirmar}
+            disabled={monto < 1 || monto > saldoActual}
           >
             Confirmar
           </Button>

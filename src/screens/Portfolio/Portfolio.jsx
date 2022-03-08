@@ -1,6 +1,7 @@
 import "./Portfolio.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
@@ -11,10 +12,17 @@ import { Link } from "react-router-dom";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
 import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
 import pieChart from "../../assets/svg/Group 1.svg";
+import { usuarioEnSesion } from "../../redux/actions/UserAction";
 
 function Portfolio() {
   const [open, setOpen] = useState(false);
   const [openRetiro, setOpenRetiro] = useState(false);
+  const usuario = useSelector((state) => state.user.usuario);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
 
   return (
     <>
@@ -43,15 +51,19 @@ function Portfolio() {
           </Button>
         </ButtonGroup>
 
-        <SaldoActual dineroDisponible={1000} inversiones={100000} />
+        <SaldoActual dineroDisponible={usuario.saldo} inversiones={100000} />
 
         <section className="portfolio__container">
           <TablePortfolio />
           <img src={pieChart} alt="pie" width={350} />
         </section>
 
-        <DialogIngresarDinero open={open} setOpen={setOpen} />
-        <DialogRetiroDinero open={openRetiro} setOpen={setOpenRetiro} />
+        <DialogIngresarDinero open={open} setOpen={setOpen} usuario={usuario} />
+        <DialogRetiroDinero
+          open={openRetiro}
+          setOpen={setOpenRetiro}
+          usuario={usuario}
+        />
       </main>
     </>
   );

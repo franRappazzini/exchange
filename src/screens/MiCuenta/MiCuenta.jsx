@@ -1,11 +1,28 @@
 import "./MiCuenta.css";
 
 import { Card, CardContent, CardHeader, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Header from "../../components/molecules/Header/Header";
-import React from "react";
+import { usuarioEnSesion } from "../../redux/actions/UserAction";
 
 function MiCuenta() {
+  const usuario = useSelector((state) => state.user.usuario);
+  const dispatch = useDispatch();
+  const {
+    nombres = "xx",
+    apellidos = "xx",
+    dni = "xx",
+    email = "xx",
+    saldo = "xx",
+    password = "xx",
+  } = usuario;
+
+  useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
+
   return (
     <>
       <Header />
@@ -21,28 +38,43 @@ function MiCuenta() {
             }}
           >
             <div>
-              <Typography>12345678</Typography>
-              <Typography variant="body2">DNI</Typography>
+              <Typography>{dni}</Typography>
+              <Typography variant="body2" color={"gray"}>
+                DNI
+              </Typography>
             </div>
             <div>
-              <Typography>frnacisco</Typography>
-              <Typography variant="body2">Nombre</Typography>
+              <Typography>{nombres}</Typography>
+              <Typography variant="body2" color={"gray"}>
+                Nombres
+              </Typography>
             </div>
             <div>
-              <Typography>rappazzini</Typography>
-              <Typography variant="body2">Apellido</Typography>
+              <Typography>{apellidos}</Typography>
+              <Typography variant="body2" color={"gray"}>
+                Apellidos
+              </Typography>
             </div>
             <div>
-              <Typography>email@outlook.com</Typography>
-              <Typography variant="body2">Email</Typography>
+              <Typography>{email}</Typography>
+              <Typography variant="body2" color={"gray"}>
+                Email
+              </Typography>
             </div>
             <div>
-              <Typography>21321321312</Typography>
-              <Typography variant="body2">Contraseña</Typography>
+              <Typography>{password}</Typography>
+              <Typography variant="body2" color={"gray"}>
+                Contraseña
+              </Typography>
             </div>
             <div>
-              <Typography>$893427</Typography>
-              <Typography variant="body2">Dinero en cuenta</Typography>
+              <Typography>
+                $
+                {saldo !== "xx" ? new Intl.NumberFormat().format(saldo) : saldo}
+              </Typography>
+              <Typography variant="body2" color={"gray"}>
+                Dinero en cuenta
+              </Typography>
             </div>
           </CardContent>
         </Card>

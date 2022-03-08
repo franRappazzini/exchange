@@ -2,6 +2,7 @@ import {
   Card,
   CardHeader,
   Paper,
+  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -178,21 +179,25 @@ function TablePortfolio() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.producto}>
-                <TableCell component="th" scope="row">
-                  {row.producto}
-                </TableCell>
-                <TableCell align="center">{row.cantidad}</TableCell>
-                <TableCell align="center">${row.ultimoPrecio}</TableCell>
-                <TableCell align="center">{row.porcentajeDiario}%</TableCell>
-                <TableCell align="center">${row.variacionDiario}</TableCell>
-                <TableCell align="center">${row.ppc}</TableCell>
-                <TableCell align="center">{row.porcentajeGan}%</TableCell>
-                <TableCell align="center">${row.variacionGan}</TableCell>
-                <TableCell align="center">${row.total}</TableCell>
-              </TableRow>
-            ))}
+            {rows ? (
+              rows.map((row) => (
+                <TableRow key={row.producto}>
+                  <TableCell component="th" scope="row">
+                    {row.producto}
+                  </TableCell>
+                  <TableCell align="center">{row.cantidad}</TableCell>
+                  <TableCell align="center">${row.ultimoPrecio}</TableCell>
+                  <TableCell align="center">{row.porcentajeDiario}%</TableCell>
+                  <TableCell align="center">${row.variacionDiario}</TableCell>
+                  <TableCell align="center">${row.ppc}</TableCell>
+                  <TableCell align="center">{row.porcentajeGan}%</TableCell>
+                  <TableCell align="center">${row.variacionGan}</TableCell>
+                  <TableCell align="center">${row.total}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <Skeleton />
+            )}
           </TableBody>
         </Table>
       </TableContainer>

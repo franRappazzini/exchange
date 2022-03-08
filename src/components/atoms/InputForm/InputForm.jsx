@@ -13,7 +13,6 @@ function InputForm({
 }) {
   return (
     <TextField
-      id="standard-basic"
       label={label}
       variant="filled"
       required

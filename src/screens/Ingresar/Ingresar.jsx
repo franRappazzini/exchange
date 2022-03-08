@@ -2,7 +2,12 @@ import "./Ingresar.css";
 
 import { Button, Card, CardHeader } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  obtenerUsuarios,
+  usuarioEnSesion,
+} from "../../redux/actions/UserAction";
+import { useDispatch, useSelector } from "react-redux";
 
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import InputForm from "../../components/atoms/InputForm/InputForm";
@@ -15,7 +20,13 @@ function Ingresar() {
     password: "",
     verPassword: false,
   });
+  const usuarios = useSelector((state) => state.user.usuarios);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(obtenerUsuarios());
+  }, [dispatch]);
 
   function handleChange(e) {
     setDatosUsuario({
@@ -34,7 +45,26 @@ function Ingresar() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    navigate("/portfolio");
+    const usuarioFind = usuarios
+      ? usuarios.find(
+          (user) =>
+            user.email === datosUsuario.email || user.dni === datosUsuario.email
+        )
+      : null;
+
+    console.log(usuarioFind);
+
+    if (usuarioFind) {
+      if (usuarioFind.password === datosUsuario.password) {
+        // va al localStorage para usarlo en redux
+        localStorage.setItem("usuario", JSON.stringify(usuarioFind));
+        navigate("/portfolio");
+      } else {
+        alert("Contraseña incorrecta");
+      }
+    } else {
+      alert("Usuario no encontrado");
+    }
   }
 
   function eyeIcon() {
