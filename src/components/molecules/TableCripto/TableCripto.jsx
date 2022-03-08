@@ -127,7 +127,9 @@ function TableCripto() {
             </TableHead>
             <TableBody>
               {criptosFiltradas.length > 0 &&
-                criptosFiltradas.map((row) => <TableRowCripto cripto={row} />)}
+                criptosFiltradas.map((row) => (
+                  <TableRowCripto key={row.id} cripto={row} />
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

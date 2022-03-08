@@ -3,21 +3,43 @@ import "./DialogCompraCripto.css";
 import * as React from "react";
 
 import { Button, InputAdornment, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
+import { comprarCripto } from "../../../../redux/actions/ActivosAction";
+import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
 
 export default function DialogCompraCripto({ cripto, open, setOpen }) {
   const [cantidad, setCantidad] = React.useState("");
   const [confirmar, setConfirmar] = React.useState(false);
   const { id, image, name, symbol, current_price } = cripto;
+  const usuario = useSelector((state) => state.user.usuario);
+  const { saldo = 0 } = usuario;
+  const dispatch = useDispatch();
 
-  const dinero = 10000;
+  React.useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleConfirmar() {
+    setConfirmar(false);
+    setOpen(false);
+    dispatch(
+      comprarCripto(
+        usuario.id,
+        cripto,
+        cantidad / current_price,
+        saldo,
+        cantidad
+      )
+    );
+  }
 
   return (
     <>
@@ -36,7 +58,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
             <div>
               <Typography gutterBottom>Saldo disponible:</Typography>
               <Typography gutterBottom>
-                ${new Intl.NumberFormat().format(dinero)}
+                ${new Intl.NumberFormat().format(saldo)}
               </Typography>
             </div>
             <TextField
@@ -48,7 +70,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
               autoComplete="off"
-              error={cantidad > dinero || cantidad < 0}
+              error={cantidad > saldo || cantidad < 0}
               sx={{ m: "1rem 0", width: "100%" }}
               autoFocus
               InputProps={{
@@ -70,7 +92,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
               variant="contained"
               color="success"
               onClick={() => setConfirmar(true)}
-              disabled={cantidad > dinero || cantidad < 1}
+              disabled={cantidad > saldo || cantidad < 1}
             >
               Comprar
             </Button>
@@ -101,7 +123,11 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
               </Typography>
             </div>
             <div className="btns__container-cripto">
-              <Button variant="contained" color="success">
+              <Button
+                variant="contained"
+                color="success"
+                onClick={handleConfirmar}
+              >
                 Confirmar
               </Button>
               <Button

@@ -10,7 +10,7 @@ function TableRowCripto({ cripto }) {
 
   return (
     <>
-      <TableRow key={cripto.id}>
+      <TableRow>
         <TableCell component="th" scope="row">
           {cripto.market_cap_rank}
         </TableCell>

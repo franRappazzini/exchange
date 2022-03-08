@@ -2,18 +2,25 @@ import "./DialogCompraAccion.css";
 
 import * as React from "react";
 
-import { Button, InputAdornment, TextField } from "@mui/material";
+import { Button, InputAdornment, Skeleton, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
+import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
 
 export default function DialogCompraAccion({ accion, open, setOpen }) {
   const [cantidad, setCantidad] = React.useState("");
   const [confirmar, setConfirmar] = React.useState(false);
   const { symbol, price } = accion;
+  const usuario = useSelector((state) => state.user.usuario);
+  const { saldo = 0 } = usuario;
+  const dispatch = useDispatch();
 
-  const dinero = 10000;
+  React.useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
 
   const handleClose = () => {
     setOpen(false);
@@ -32,7 +39,7 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
             <div>
               <Typography gutterBottom>Saldo disponible:</Typography>
               <Typography gutterBottom>
-                ${new Intl.NumberFormat().format(dinero)}
+                ${new Intl.NumberFormat().format(saldo)}
               </Typography>
             </div>
             <TextField
@@ -44,7 +51,7 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
               autoComplete="off"
-              error={cantidad > dinero || cantidad < 0}
+              error={cantidad > saldo || cantidad < 0}
               sx={{ m: "1rem 0", width: "100%" }}
               autoFocus
               InputProps={{
@@ -65,7 +72,7 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
               variant="contained"
               color="success"
               onClick={() => setConfirmar(true)}
-              disabled={cantidad > dinero || cantidad < 1}
+              disabled={cantidad > saldo || cantidad < 1}
             >
               Comprar
             </Button>
