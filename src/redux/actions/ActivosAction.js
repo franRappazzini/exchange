@@ -25,11 +25,19 @@ export function comprarCripto(idUsuario, cripto, cantidad, saldo, gasto) {
         ).toFixed(8);
 
         if (snapshot.exists()) {
-          rutaCripto.child("cantidad").set(total);
+          rutaCripto.child("ppc").once("value", (snap) => {
+            if (snap.exists()) {
+              const ppc = snap.val();
+              ppc.push(cripto.current_price);
+
+              rutaCripto.update({ cantidad: total, ppc: ppc });
+            }
+          });
         } else {
           rutaCripto.set({
             ...cripto,
             cantidad: parseFloat(cantidad).toFixed(8),
+            ppc: [cripto.current_price],
           });
         }
       });
@@ -88,11 +96,19 @@ export function comprarAccion(idUsuario, accion, cantidad, saldo, gasto) {
         ).toFixed(8);
 
         if (snapshot.exists()) {
-          rutaAccion.child("cantidad").set(total);
+          rutaAccion.child("ppc").once("value", (snap) => {
+            if (snap.exists()) {
+              const ppc = snap.val();
+              ppc.push(accion.price);
+
+              rutaAccion.update({ cantidad: total, ppc: ppc });
+            }
+          });
         } else {
           rutaAccion.set({
             ...accion,
             cantidad: parseFloat(cantidad).toFixed(8),
+            ppc: [accion.price],
           });
         }
       });

@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardHeader,
   Link,
@@ -9,7 +10,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableSortLabel,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import {
@@ -29,7 +29,26 @@ function TablePortfolio() {
     dispatch(obtenerCriptos(usuario.id));
   }, [dispatch, usuario.id]);
 
-  console.log(criptos);
+  function obtenerPPCCripto(ppc) {
+    if (ppc) {
+      let suma = 0;
+      ppc.forEach((p) => {
+        suma += p;
+      });
+
+      return (suma / ppc.length).toFixed(2);
+    }
+  }
+  function obtenerPPCAccion(ppc) {
+    if (ppc) {
+      let suma = 0;
+      ppc.forEach((p) => {
+        suma += p;
+      });
+
+      return (suma / ppc.length).toFixed(2);
+    }
+  }
 
   return (
     <Card sx={{ margin: "1rem 0" }} elevation={4}>
@@ -68,7 +87,7 @@ function TablePortfolio() {
                   <TableCell align="center">{row.porcentajeDiario}%</TableCell>
                   <TableCell align="center">${row.variacionDiario}</TableCell>
                   <TableCell align="center">
-                    ${new Intl.NumberFormat().format(row.current_price)}
+                    ${new Intl.NumberFormat().format(obtenerPPCCripto(row.ppc))}
                   </TableCell>
                   <TableCell align="center">{row.porcentajeGan}%</TableCell>
                   <TableCell align="center">${row.variacionGan}</TableCell>
@@ -94,7 +113,9 @@ function TablePortfolio() {
                   <TableCell align="center">${row.ultimoPrecio}</TableCell>
                   <TableCell align="center">{row.porcentajeDiario}%</TableCell>
                   <TableCell align="center">${row.variacionDiario}</TableCell>
-                  <TableCell align="center">${row.price}</TableCell>
+                  <TableCell align="center">
+                    ${new Intl.NumberFormat().format(obtenerPPCAccion(row.ppc))}
+                  </TableCell>
                   <TableCell align="center">{row.porcentajeGan}%</TableCell>
                   <TableCell align="center">${row.variacionGan}</TableCell>
                   <TableCell align="center">${row.total}</TableCell>
