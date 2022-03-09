@@ -6,6 +6,8 @@ const COMPRAR_CRIPTO = "COMPRAR_CRIPTO";
 const VENDER_CRIPTO = "VENDER_CRIPTO";
 const COMPRAR_ACCION = "COMPRAR_ACCION";
 const VENDER_ACCION = "VENDER_ACCION";
+const OBTENER_CRIPTOS = "OBTENER_CRIPTOS";
+const OBTENER_ACCIONES = "OBTENER_ACCIONES";
 
 export function comprarCripto(idUsuario, cripto, cantidad, saldo, gasto) {
   const rutaCripto = db.ref(
@@ -130,5 +132,37 @@ export function venderAccion(idUsuario, accion, cantidad, saldo, ingreso) {
     db.ref(`usuarios/${idUsuario}/saldo`).set(saldo + ingreso);
 
     dispatch({ type: VENDER_ACCION });
+  };
+}
+
+export function obtenerCriptos(idUsuario) {
+  return (dispatch) => {
+    db.ref(`usuarios/${idUsuario}/portfolio/cripto`).on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        const criptos = Object.keys(snapshot.val()).map((key) => ({
+          ...snapshot.val()[key],
+        }));
+
+        dispatch({ type: OBTENER_CRIPTOS, criptos: criptos });
+      } else {
+        dispatch({ type: OBTENER_CRIPTOS, criptos: [] });
+      }
+    });
+  };
+}
+
+export function obtenerAcciones(idUsuario) {
+  return (dispatch) => {
+    db.ref(`usuarios/${idUsuario}/portfolio/accion`).on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        const acciones = Object.keys(snapshot.val()).map((key) => ({
+          ...snapshot.val()[key],
+        }));
+
+        dispatch({ type: OBTENER_ACCIONES, acciones: acciones });
+      } else {
+        dispatch({ type: OBTENER_ACCIONES, acciones: [] });
+      }
+    });
   };
 }

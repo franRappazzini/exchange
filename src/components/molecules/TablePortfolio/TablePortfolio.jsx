@@ -1,164 +1,35 @@
 import {
   Card,
   CardHeader,
+  Link,
   Paper,
-  Skeleton,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
 } from "@mui/material";
-
-import React from "react";
+import React, { useEffect } from "react";
+import {
+  obtenerAcciones,
+  obtenerCriptos,
+} from "../../../redux/actions/ActivosAction";
+import { useDispatch, useSelector } from "react-redux";
 
 function TablePortfolio() {
-  const rows = [
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "AAPL",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-    {
-      producto: "MSFT",
-      cantidad: 1,
-      ultimoPrecio: 100,
-      porcentajeDiario: 1.1,
-      variacionDiario: 1.1,
-      ppc: 20,
-      porcentajeGan: 20,
-      variacionGan: 20,
-      total: 100,
-    },
-  ];
+  const usuario = useSelector((state) => state.user.usuario);
+  const acciones = useSelector((state) => state.activos.acciones);
+  const criptos = useSelector((state) => state.activos.criptos);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(obtenerAcciones(usuario.id));
+    dispatch(obtenerCriptos(usuario.id));
+  }, [dispatch, usuario.id]);
+
+  console.log(criptos);
 
   return (
     <Card sx={{ margin: "1rem 0" }} elevation={4}>
@@ -179,25 +50,56 @@ function TablePortfolio() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows ? (
-              rows.map((row) => (
-                <TableRow key={row.producto}>
+            {criptos &&
+              criptos.map((row) => (
+                <TableRow key={row.symbol}>
                   <TableCell component="th" scope="row">
-                    {row.producto}
+                    <Link
+                      href={`https://www.coingecko.com/en/coins/${row.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="CoinGecko"
+                    >
+                      {row.symbol.toUpperCase()}
+                    </Link>
                   </TableCell>
                   <TableCell align="center">{row.cantidad}</TableCell>
                   <TableCell align="center">${row.ultimoPrecio}</TableCell>
                   <TableCell align="center">{row.porcentajeDiario}%</TableCell>
                   <TableCell align="center">${row.variacionDiario}</TableCell>
-                  <TableCell align="center">${row.ppc}</TableCell>
+                  <TableCell align="center">
+                    ${new Intl.NumberFormat().format(row.current_price)}
+                  </TableCell>
                   <TableCell align="center">{row.porcentajeGan}%</TableCell>
                   <TableCell align="center">${row.variacionGan}</TableCell>
                   <TableCell align="center">${row.total}</TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <Skeleton />
-            )}
+              ))}
+          </TableBody>
+          <TableBody>
+            {acciones &&
+              acciones.map((row) => (
+                <TableRow key={row.symbol}>
+                  <TableCell component="th" scope="row">
+                    <Link
+                      href={`https://finance.yahoo.com/quote/${row.symbol}?p=${row.symbol}&.tsrc=fin-srch`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="Yahoo Finance"
+                    >
+                      {row.symbol}
+                    </Link>
+                  </TableCell>
+                  <TableCell align="center">{row.cantidad}</TableCell>
+                  <TableCell align="center">${row.ultimoPrecio}</TableCell>
+                  <TableCell align="center">{row.porcentajeDiario}%</TableCell>
+                  <TableCell align="center">${row.variacionDiario}</TableCell>
+                  <TableCell align="center">${row.price}</TableCell>
+                  <TableCell align="center">{row.porcentajeGan}%</TableCell>
+                  <TableCell align="center">${row.variacionGan}</TableCell>
+                  <TableCell align="center">${row.total}</TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
