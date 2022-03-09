@@ -101,3 +101,34 @@ export function comprarAccion(idUsuario, accion, cantidad, saldo, gasto) {
     dispatch({ type: COMPRAR_ACCION });
   };
 }
+
+export function venderAccion(idUsuario, accion, cantidad, saldo, ingreso) {
+  const rutaAccion = db.ref(
+    `usuarios/${idUsuario}/portfolio/accion/${accion.symbol}`
+  );
+
+  return (dispatch) => {
+    // resta accion
+    rutaAccion
+      .child("cantidad")
+      .get() // get para leer una unica vez (sino renderizaba infinito)
+      .then((snapshot) => {
+        const total = (
+          parseFloat(snapshot.val()) - parseFloat(cantidad)
+        ).toFixed(8);
+
+        if (snapshot.exists()) {
+          if (parseFloat(total) === 0.0) {
+            rutaAccion.remove();
+          } else {
+            rutaAccion.child("cantidad").set(total);
+          }
+        }
+      });
+
+    // suma el saldo
+    db.ref(`usuarios/${idUsuario}/saldo`).set(saldo + ingreso);
+
+    dispatch({ type: VENDER_ACCION });
+  };
+}

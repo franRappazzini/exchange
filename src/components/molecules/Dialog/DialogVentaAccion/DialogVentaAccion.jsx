@@ -1,23 +1,59 @@
 import "./DialogVentaAccion.css";
 
 import { Button, TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import React from "react";
 import Typography from "@mui/material/Typography";
+import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
+import { venderAccion } from "../../../../redux/actions/ActivosAction";
 
 function DialogVentaAccion({ accion, open, setOpen }) {
   const [cantidad, setCantidad] = React.useState("");
   const [confirmar, setConfirmar] = React.useState(false);
-
   const { symbol, price } = accion;
+  const usuario = useSelector((state) => state.user.usuario);
+  const dispatch = useDispatch();
 
-  const acciones = 2;
+  React.useEffect(() => {
+    dispatch(usuarioEnSesion());
+  }, [dispatch]);
 
   const handleClose = () => {
     setOpen(false);
   };
+
+  function handleConfirmar() {
+    setConfirmar(false);
+    handleClose();
+    dispatch(
+      venderAccion(
+        usuario.id,
+        accion,
+        cantidad,
+        usuario.saldo,
+        cantidad * price
+      )
+    );
+  }
+
+  function cantDisponibleAccion() {
+    const portfolioAccion = usuario.portfolio.accion
+      ? Object.values(usuario.portfolio.accion).map((a) => ({
+          ...a,
+        }))
+      : [];
+    const accionFind = portfolioAccion.find(
+      (accion) => accion.symbol === symbol
+    );
+    const cantAccion = accionFind
+      ? parseFloat(accionFind.cantidad).toFixed(8)
+      : 0;
+
+    return cantAccion;
+  }
 
   return (
     <>
@@ -32,7 +68,7 @@ function DialogVentaAccion({ accion, open, setOpen }) {
             <div>
               <Typography gutterBottom>Cantidad disponible:</Typography>
               <Typography gutterBottom>
-                {new Intl.NumberFormat().format(acciones)} {symbol}
+                {cantDisponibleAccion()} {symbol}
               </Typography>
             </div>
             <TextField
@@ -44,7 +80,7 @@ function DialogVentaAccion({ accion, open, setOpen }) {
               value={cantidad}
               onChange={(e) => setCantidad(e.target.value)}
               autoComplete="off"
-              error={cantidad > acciones || cantidad < 0}
+              error={cantidad > cantDisponibleAccion() || cantidad < 0}
               sx={{ m: "1rem 0", width: "100%" }}
               autoFocus
             />
@@ -61,7 +97,9 @@ function DialogVentaAccion({ accion, open, setOpen }) {
               color="error"
               onClick={() => setConfirmar(true)}
               disabled={
-                cantidad > acciones || cantidad <= 0 || cantidad * price < 1
+                cantidad > cantDisponibleAccion() ||
+                cantidad <= 0 ||
+                cantidad * price < 1
               }
             >
               Vender
@@ -95,7 +133,11 @@ function DialogVentaAccion({ accion, open, setOpen }) {
             </div>
 
             <div className="btns__container-accion">
-              <Button variant="contained" color="error">
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleConfirmar}
+              >
                 Confirmar
               </Button>
               <Button variant="text" onClick={() => setConfirmar(false)}>
