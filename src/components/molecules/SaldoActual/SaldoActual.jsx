@@ -1,8 +1,15 @@
-import { Card, CardContent, CardHeader, Tooltip } from "@mui/material";
+import "./SaldoActual.css";
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 import InfoIcon from "@mui/icons-material/Info";
-import { toContainHTML } from "@testing-library/jest-dom/dist/matchers";
 import { useSelector } from "react-redux";
 
 function SaldoActual({ dineroDisponible, inversiones }) {
@@ -41,15 +48,15 @@ function SaldoActual({ dineroDisponible, inversiones }) {
   }, [suma, total]);
 
   return (
-    <Card sx={{ maxWidth: "60%" }} elevation={4}>
+    <Card className="saldo-actual__container" elevation={4}>
       <CardHeader title="Saldo actual" />
 
-      <CardContent sx={{ display: "flex", justifyContent: "space-between" }}>
+      <CardContent className="saldos__container">
         <div className="dinero__container">
-          <p>
+          <Typography gutterBottom>
             Dinero disponible: $
             {new Intl.NumberFormat().format(dineroDisponible)}
-          </p>
+          </Typography>
           <Tooltip
             title="Dinero disponible para comprar activos o retirar."
             arrow
@@ -65,7 +72,9 @@ function SaldoActual({ dineroDisponible, inversiones }) {
           </Tooltip>
         </div>
         <div className="dinero__container">
-          <p>Mis inversiones: ${new Intl.NumberFormat().format(suma)}</p>
+          <Typography gutterBottom>
+            Mis inversiones: ${new Intl.NumberFormat().format(suma)}
+          </Typography>
           <Tooltip title="Dinero invertido total (acciones + cripto)." arrow>
             <InfoIcon
               sx={{
@@ -78,10 +87,10 @@ function SaldoActual({ dineroDisponible, inversiones }) {
           </Tooltip>
         </div>
         <div className="dinero__container">
-          <p>
+          <Typography gutterBottom>
             Total: $
             {new Intl.NumberFormat().format(dineroDisponible + inversiones)}
-          </p>
+          </Typography>
           <Tooltip title="Dinero total en la plataforma." arrow>
             <InfoIcon
               sx={{

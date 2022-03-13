@@ -1,0 +1,9 @@
+.btns-dialog__container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns-dialog__container a {
+  text-decoration: none;
+}

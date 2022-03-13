@@ -52,7 +52,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
             </div>
 
             <p>${new Intl.NumberFormat().format(current_price)}</p>
-            <p>
+            <p className="p__info">
               <Link
                 href={`https://www.coingecko.com/en/coins/${id}`}
                 title="CoinGecko"

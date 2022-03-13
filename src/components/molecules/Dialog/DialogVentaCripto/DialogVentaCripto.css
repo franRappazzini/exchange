@@ -7,3 +7,15 @@
 .datos__cripto--venta h1 {
   color: #f44336;
 }
+
+@media only screen and (max-width: 600px) {
+  .datos__cripto--venta {
+    flex-direction: column;
+  }
+  .datos__cripto--venta h1 {
+    margin-bottom: 0;
+  }
+  .datos__cripto--venta p {
+    margin-top: 0;
+  }
+}

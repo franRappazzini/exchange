@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { AdvancedChart } from "react-tradingview-embed";
 import Header from "../../components/molecules/Header/Header";
 import { TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import verificarUsuario from "../../utils/functions/verificarUsuario";
 
 function Graficos() {
   const [symbol, setSymbol] = useState("AAPL");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    verificarUsuario(navigate);
+  }, [navigate]);
 
   return (
     <>

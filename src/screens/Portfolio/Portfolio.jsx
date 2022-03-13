@@ -1,5 +1,6 @@
 import "./Portfolio.css";
 
+import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,21 +9,23 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 import DialogIngresarDinero from "../../components/molecules/Dialog/DialogIngresarDinero/DialogIngresarDinero";
 import DialogRetiroDinero from "../../components/molecules/Dialog/DialogRetiroDinero/DialogRetiroDinero";
 import Header from "../../components/molecules/Header/Header";
-import { Link } from "react-router-dom";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
 import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
 import pieChart from "../../assets/svg/Group 1.svg";
 import { usuarioEnSesion } from "../../redux/actions/UserAction";
+import verificarUsuario from "../../utils/functions/verificarUsuario";
 
 function Portfolio() {
   const [open, setOpen] = useState(false);
   const [openRetiro, setOpenRetiro] = useState(false);
   const usuario = useSelector((state) => state.user.usuario);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(usuarioEnSesion());
-  }, [dispatch]);
+    verificarUsuario(navigate);
+  }, [dispatch, navigate]);
 
   return (
     <>
@@ -32,17 +35,13 @@ function Portfolio() {
         <ButtonGroup
           variant="outlined"
           aria-label="button group"
-          sx={{
-            width: "60%",
-            justifyContent: "space-between",
-            margin: "1rem 0",
-          }}
+          className="button-group__container"
         >
           <Button color="primary" onClick={() => setOpen(true)}>
             Ingreso de dinero
           </Button>
-          <Link to="/operar">
-            <Button color="success" variant="contained" sx={{ width: "20rem" }}>
+          <Link to="/operar" className="btn__invertir">
+            <Button color="success" variant="contained">
               INVERTIR
             </Button>
           </Link>

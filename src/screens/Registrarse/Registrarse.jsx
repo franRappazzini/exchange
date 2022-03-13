@@ -37,7 +37,7 @@ function Registrarse() {
       verPassword: !nuevoUsuario.verPassword,
     });
   }
-  console.log(usuarios);
+
   function handleSubmit(e) {
     e.preventDefault();
 

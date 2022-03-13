@@ -25,3 +25,9 @@
   color: #90caf9;
   text-decoration: none;
 }
+
+@media only screen and (max-width: 600px) {
+  .form__registrarse {
+    grid-template-columns: 1fr;
+  }
+}

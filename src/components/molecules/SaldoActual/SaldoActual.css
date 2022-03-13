@@ -1,0 +1,19 @@
+.saldo-actual__container {
+  max-width: 65%;
+}
+
+.saldos__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media only screen and (max-width: 768px) {
+  .saldo-actual__container {
+    max-width: 100%;
+  }
+  .saldos__container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

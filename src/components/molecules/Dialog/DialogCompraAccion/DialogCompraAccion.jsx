@@ -42,7 +42,7 @@ export default function DialogCompraAccion({ accion, open, setOpen }) {
           <section className="accion__container">
             <h1>{symbol}</h1>
             <p>${new Intl.NumberFormat().format(price)}</p>
-            <p>
+            <p className="p__info">
               <Link
                 href={`https://finance.yahoo.com/quote/${symbol}?p=${symbol}&.tsrc=fin-srch`}
                 title="Yahoo Finance"

@@ -1,14 +1,21 @@
 import "./Operar.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import Header from "../../components/molecules/Header/Header";
 import TableAcciones from "../../components/molecules/TableAcciones/TableAcciones";
 import TableCripto from "../../components/molecules/TableCripto/TableCripto";
+import { useNavigate } from "react-router-dom";
+import verificarUsuario from "../../utils/functions/verificarUsuario";
 
 function Operar() {
   const [alignment, setAlignment] = useState("cripto");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    verificarUsuario(navigate);
+  }, [navigate]);
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);

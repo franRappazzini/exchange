@@ -1,14 +1,24 @@
 import "./MiCuenta.css";
 
-import { Card, CardContent, CardHeader, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import DialogConfirmar from "../../components/molecules/Dialog/DialogConfirmar/DialogConfirmar";
 import Header from "../../components/molecules/Header/Header";
+import { useNavigate } from "react-router-dom";
 import { usuarioEnSesion } from "../../redux/actions/UserAction";
+import verificarUsuario from "../../utils/functions/verificarUsuario";
 
 function MiCuenta() {
   const usuario = useSelector((state) => state.user.usuario);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const {
     nombres = "xx",
@@ -18,25 +28,21 @@ function MiCuenta() {
     saldo = "xx",
     password = "xx",
   } = usuario;
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(usuarioEnSesion());
-  }, [dispatch]);
+    verificarUsuario(navigate);
+  }, [dispatch, navigate]);
 
   return (
     <>
       <Header />
 
-      <main className="main__miCuenta">
+      <main className="main__mi-cuenta">
         <Card sx={{ marginTop: "1rem" }}>
           <CardHeader title="Mis datos" />
-          <CardContent
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gridGap: "1.5rem",
-            }}
-          >
+          <CardContent className="mi-cuenta__container">
             <div>
               <Typography>{dni}</Typography>
               <Typography variant="body2" color={"gray"}>
@@ -78,6 +84,11 @@ function MiCuenta() {
             </div>
           </CardContent>
         </Card>
+        <Button variant="text" color="error" onClick={() => setOpen(true)}>
+          Cerrar sesion
+        </Button>
+
+        <DialogConfirmar open={open} setOpen={setOpen} />
       </main>
     </>
   );
