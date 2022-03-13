@@ -142,8 +142,8 @@ function Home() {
 
           <AdvancedChart
             widgetProps={{
-              width: 550,
-              height: 350,
+              width: window.innerWidth > 768 ? 550 : "100vw",
+              height: window.innerWidth < 768 ? 350 : "auto",
               hide_side_toolbar: true,
               hide_top_toolbar: true,
               locale: "es",

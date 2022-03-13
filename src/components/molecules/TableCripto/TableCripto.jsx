@@ -16,22 +16,20 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import TableRowCripto from "../TableRowCripto/TableRowCripto";
+import { obtenerCriptos } from "../../../redux/actions/ActivosAction";
 
 function TableCripto() {
-  const [criptos, setCriptos] = useState([]);
   const [buscaCripto, setBuscaCripto] = useState("");
   const [limit, setLimit] = useState(25);
+  const criptos = useSelector((state) => state.activos.criptosCG);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
-    )
-      .then((res) => res.json())
-      .then((data) => setCriptos(data))
-      .catch((err) => console.log("ERROR:", err));
-  }, [limit]);
+    dispatch(obtenerCriptos(limit));
+  }, [dispatch, limit]);
 
   // filtra criptos buscadas
   const criptosFiltradas =

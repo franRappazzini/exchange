@@ -40,7 +40,7 @@ function DialogVentaCripto({ cripto, open, setOpen }) {
   }
 
   function cantDisponibleCripto() {
-    const portfolioCripto = usuario.portfolio.cripto
+    const portfolioCripto = usuario.portfolio
       ? Object.values(usuario.portfolio.cripto).map((c) => ({
           ...c,
         }))

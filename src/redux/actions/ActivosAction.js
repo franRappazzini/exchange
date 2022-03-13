@@ -1,13 +1,53 @@
 import getDB from "../../utils/services/db";
 
 const db = getDB();
-
+const OBTENER_TOTAL_INVERTIDO = "OBTENER_TOTAL_INVERTIDO";
+const OBTENER_CRIPTOS = "OBTENER_CRIPTOS";
+const OBTENER_ACCIONES = "OBTENER_ACCIONES";
 const COMPRAR_CRIPTO = "COMPRAR_CRIPTO";
 const VENDER_CRIPTO = "VENDER_CRIPTO";
 const COMPRAR_ACCION = "COMPRAR_ACCION";
 const VENDER_ACCION = "VENDER_ACCION";
-const OBTENER_CRIPTOS = "OBTENER_CRIPTOS";
-const OBTENER_ACCIONES = "OBTENER_ACCIONES";
+const OBTENER_CRIPTOS_PORTFOLIO = "OBTENER_CRIPTOS_PORTFOLIO";
+const OBTENER_ACCIONES_PORTFOLIO = "OBTENER_ACCIONES_PORTFOLIO";
+
+// export function obtenerTotalInvertido(criptosPortfolio, cantidad) {
+//   return async (dispatch) => {
+//     const total = [];
+
+//     criptosPortfolio.length > 0 &&
+//       criptosPortfolio.forEach((cripto) => {
+//         fetch(
+//           `https://api.coingecko.com/api/v3/simple/price?ids=${cripto.id}&vs_currencies=usd`
+//         )
+//           .then((res) => res.json())
+//           .then((data) => total.push(Object.values(data)[0].usd))
+//           .catch((err) => console.log("ERROR: ", err));
+//       });
+
+//     await dispatch({
+//       type: OBTENER_TOTAL_INVERTIDO,
+//       total: total,
+//     });
+//   };
+// }
+
+export function obtenerCriptos(limit) {
+  return (dispatch) => {
+    fetch(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: OBTENER_CRIPTOS,
+          criptos: data,
+        });
+      })
+      .catch((err) => console.log("ERROR:", err));
+  };
+}
 
 export function comprarCripto(idUsuario, cripto, cantidad, saldo, gasto) {
   const rutaCripto = db.ref(
@@ -151,7 +191,7 @@ export function venderAccion(idUsuario, accion, cantidad, saldo, ingreso) {
   };
 }
 
-export function obtenerCriptos(idUsuario) {
+export function obtenerCriptosPortfolio(idUsuario) {
   return (dispatch) => {
     db.ref(`usuarios/${idUsuario}/portfolio/cripto`).on("value", (snapshot) => {
       if (snapshot.exists()) {
@@ -159,15 +199,15 @@ export function obtenerCriptos(idUsuario) {
           ...snapshot.val()[key],
         }));
 
-        dispatch({ type: OBTENER_CRIPTOS, criptos: criptos });
+        dispatch({ type: OBTENER_CRIPTOS_PORTFOLIO, criptos: criptos });
       } else {
-        dispatch({ type: OBTENER_CRIPTOS, criptos: [] });
+        dispatch({ type: OBTENER_CRIPTOS_PORTFOLIO, criptos: [] });
       }
     });
   };
 }
 
-export function obtenerAcciones(idUsuario) {
+export function obtenerAccionesPortfolio(idUsuario) {
   return (dispatch) => {
     db.ref(`usuarios/${idUsuario}/portfolio/accion`).on("value", (snapshot) => {
       if (snapshot.exists()) {
@@ -175,9 +215,9 @@ export function obtenerAcciones(idUsuario) {
           ...snapshot.val()[key],
         }));
 
-        dispatch({ type: OBTENER_ACCIONES, acciones: acciones });
+        dispatch({ type: OBTENER_ACCIONES_PORTFOLIO, acciones: acciones });
       } else {
-        dispatch({ type: OBTENER_ACCIONES, acciones: [] });
+        dispatch({ type: OBTENER_ACCIONES_PORTFOLIO, acciones: [] });
       }
     });
   };

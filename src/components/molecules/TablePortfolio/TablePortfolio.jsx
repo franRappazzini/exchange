@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardHeader,
   Link,
@@ -13,8 +12,8 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import {
-  obtenerAcciones,
-  obtenerCriptos,
+  obtenerAccionesPortfolio,
+  obtenerCriptosPortfolio,
 } from "../../../redux/actions/ActivosAction";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,21 +24,11 @@ function TablePortfolio() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(obtenerAcciones(usuario.id));
-    dispatch(obtenerCriptos(usuario.id));
+    dispatch(obtenerAccionesPortfolio(usuario.id));
+    dispatch(obtenerCriptosPortfolio(usuario.id));
   }, [dispatch, usuario.id]);
 
-  function obtenerPPCCripto(ppc) {
-    if (ppc) {
-      let suma = 0;
-      ppc.forEach((p) => {
-        suma += p;
-      });
-
-      return (suma / ppc.length).toFixed(2);
-    }
-  }
-  function obtenerPPCAccion(ppc) {
+  function obtenerPPC(ppc) {
     if (ppc) {
       let suma = 0;
       ppc.forEach((p) => {
@@ -87,7 +76,7 @@ function TablePortfolio() {
                   <TableCell align="center">{row.porcentajeDiario}%</TableCell>
                   <TableCell align="center">${row.variacionDiario}</TableCell>
                   <TableCell align="center">
-                    ${new Intl.NumberFormat().format(obtenerPPCCripto(row.ppc))}
+                    ${new Intl.NumberFormat().format(obtenerPPC(row.ppc))}
                   </TableCell>
                   <TableCell align="center">{row.porcentajeGan}%</TableCell>
                   <TableCell align="center">${row.variacionGan}</TableCell>
@@ -114,7 +103,7 @@ function TablePortfolio() {
                   <TableCell align="center">{row.porcentajeDiario}%</TableCell>
                   <TableCell align="center">${row.variacionDiario}</TableCell>
                   <TableCell align="center">
-                    ${new Intl.NumberFormat().format(obtenerPPCAccion(row.ppc))}
+                    ${new Intl.NumberFormat().format(obtenerPPC(row.ppc))}
                   </TableCell>
                   <TableCell align="center">{row.porcentajeGan}%</TableCell>
                   <TableCell align="center">${row.variacionGan}</TableCell>

@@ -3,22 +3,25 @@ import "./Ingresar.css";
 import { Button, Card, CardHeader } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import {
-  obtenerUsuarios,
-  usuarioEnSesion,
-} from "../../redux/actions/UserAction";
 import { useDispatch, useSelector } from "react-redux";
 
+import DialogError from "../../components/molecules/Dialog/DialogError/DialogError";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import InputForm from "../../components/atoms/InputForm/InputForm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { obtenerUsuarios } from "../../redux/actions/UserAction";
 
 function Ingresar() {
   const [datosUsuario, setDatosUsuario] = useState({
     email: "",
     password: "",
     verPassword: false,
+  });
+  const [open, setOpen] = useState(false);
+  const [textError, setTextError] = useState({
+    text1: "",
+    text2: "",
   });
   const usuarios = useSelector((state) => state.user.usuarios);
   const navigate = useNavigate();
@@ -52,18 +55,24 @@ function Ingresar() {
         )
       : null;
 
-    console.log(usuarioFind);
-
     if (usuarioFind) {
       if (usuarioFind.password === datosUsuario.password) {
         // va al localStorage para usarlo en redux
         localStorage.setItem("usuario", JSON.stringify(usuarioFind));
         navigate("/portfolio");
       } else {
-        alert("Contraseña incorrecta");
+        setTextError({
+          text1: "Contraseña incorrecta",
+          text2: "Intente nuevamente",
+        });
+        setOpen(true);
       }
     } else {
-      alert("Usuario no encontrado");
+      setTextError({
+        text1: "DNI o email incorrecto",
+        text2: "Sino esta registrado, registrese",
+      });
+      setOpen(true);
     }
   }
 
@@ -123,6 +132,13 @@ function Ingresar() {
             <Link to="/registrarse">Registrarse.</Link>
           </p>
         </Card>
+        <DialogError
+          open={open}
+          setOpen={setOpen}
+          text1={textError.text1}
+          text2={textError.text2}
+        />
+        ;
       </main>
     </>
   );

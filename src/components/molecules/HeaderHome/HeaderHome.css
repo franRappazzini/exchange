@@ -18,3 +18,9 @@
 .ul__navbar-home li {
   margin: 0 0.5rem;
 }
+
+@media only screen and (max-width: 768px) {
+  .header__home {
+    padding: 0 1rem;
+  }
+}
