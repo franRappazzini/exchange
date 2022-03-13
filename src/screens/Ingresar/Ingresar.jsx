@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DialogError from "../../components/molecules/Dialog/DialogError/DialogError";
+import Footer from "../Footer/Footer";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import InputForm from "../../components/atoms/InputForm/InputForm";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -141,6 +142,8 @@ function Ingresar() {
         />
         ;
       </main>
+
+      <Footer />
     </>
   );
 }

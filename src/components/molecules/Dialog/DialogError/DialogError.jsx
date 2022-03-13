@@ -12,7 +12,7 @@ function DialogError({ open, setOpen, text1, text2 }) {
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" sx={{ textAlign: "center" }} gutterBottom>
           {text1}
         </Typography>
         <Typography variant="body1" gutterBottom>

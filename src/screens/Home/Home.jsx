@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
+import Footer from "../Footer/Footer";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import { Link } from "react-router-dom";
 import creditCard from "../../assets/svg/credit_card.svg";
@@ -182,6 +183,8 @@ function Home() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 }

@@ -4,6 +4,8 @@ import { Button, Card, CardHeader, InputAdornment } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import DialogError from "../../components/molecules/Dialog/DialogError/DialogError";
+import Footer from "../Footer/Footer";
 import HeaderHome from "../../components/molecules/HeaderHome/HeaderHome";
 import InputForm from "../../components/atoms/InputForm/InputForm";
 import { Link } from "react-router-dom";
@@ -21,6 +23,7 @@ function Registrarse() {
     password2: "",
     verPassword: false,
   });
+  const [open, setOpen] = useState(false);
   const usuarios = useSelector((state) => state.user.usuarios);
   const dispatch = useDispatch();
 
@@ -64,7 +67,7 @@ function Registrarse() {
         });
       }
     } else {
-      alert("El usuario ya existe");
+      setOpen(true);
     }
   }
 
@@ -153,7 +156,16 @@ function Registrarse() {
             Ya estas registrado? <Link to="/ingresar">Ingresa.</Link>
           </p>
         </Card>
+
+        <DialogError
+          open={open}
+          setOpen={setOpen}
+          text1="El usuario ya esta registrado"
+          text2="Intente inicar sesion"
+        />
       </main>
+
+      <Footer />
     </>
   );
 }
