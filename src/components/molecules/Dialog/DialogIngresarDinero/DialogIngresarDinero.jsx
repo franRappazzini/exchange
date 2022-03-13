@@ -31,16 +31,14 @@ function DialogIngresarDinero({ open, setOpen, usuario }) {
 
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <DialogTitle sx={{ m: "2rem 3rem 0 3rem" }}>Ingresar dinero</DialogTitle>
-      <DialogContent
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          m: "0 3rem 2rem 3rem",
-        }}
+      <DialogTitle
+        sx={window.innerWidth > 768 ? { m: "2rem 3rem 0 3rem" } : { m: 0 }}
       >
+        Ingresar dinero
+      </DialogTitle>
+      <DialogContent className="dialog__ingresar-dinero">
         <section className="saldo__container">
-          <Typography gutterBottom>Dinero disponible:</Typography>
+          <Typography gutterBottom>Dinero actual:</Typography>
           <Typography gutterBottom>
             ${new Intl.NumberFormat().format(saldoActual)}
           </Typography>
@@ -52,9 +50,9 @@ function DialogIngresarDinero({ open, setOpen, usuario }) {
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
-          sx={{ width: "20rem" }}
           value={monto}
           onChange={(e) => setMonto(parseFloat(e.target.value))}
+          className="input__ingresar-dinero"
         />
 
         <section className="btns__container">
