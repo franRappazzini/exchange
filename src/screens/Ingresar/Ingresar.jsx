@@ -107,6 +107,7 @@ function Ingresar() {
               name="email"
               value={datosUsuario.email}
               onChange={handleChange}
+              autoCapitalize="none"
             />
             <InputForm
               label="Contraseña"

@@ -118,6 +118,7 @@ function Registrarse() {
               type="email"
               value={nuevoUsuario.email}
               onChange={handleChange}
+              autoCapitalize="none"
             />
             <InputForm
               label="Contraseña (evite usar una real)"

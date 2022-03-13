@@ -10,6 +10,7 @@ function InputForm({
   autoFocus,
   error,
   endAdornment,
+  autoCapitalize,
 }) {
   return (
     <TextField
@@ -26,6 +27,7 @@ function InputForm({
       InputProps={{
         endAdornment: endAdornment && endAdornment,
       }}
+      autoCapitalize={autoCapitalize}
     />
   );
 }
