@@ -29,7 +29,7 @@ function Header() {
   return (
     <header className="header__main">
       <Link to="/portfolio">
-        <h1>Header</h1>
+        <h1>arg.change</h1>
       </Link>
 
       {window.innerWidth > 768 ? (
