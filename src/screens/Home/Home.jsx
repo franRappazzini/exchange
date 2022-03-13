@@ -58,7 +58,7 @@ function Home() {
                 widgetProps={{
                   symbols: symbols,
                   locale: "es",
-                  displayMode: "regular",
+                  displayMode: "adaptive",
                 }}
               />
             </div>
@@ -66,7 +66,7 @@ function Home() {
               widgetProps={{
                 symbols: symbolsCripto,
                 locale: "es",
-                displayMode: "regular",
+                displayMode: "adaptive",
               }}
             />
           </section>
