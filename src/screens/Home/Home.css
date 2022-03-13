@@ -143,6 +143,11 @@
   margin-top: 0;
 }
 
+.section__7 div {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media only screen and (max-width: 768px) {
   .main__home img {
     display: none;

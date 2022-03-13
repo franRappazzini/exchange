@@ -23,14 +23,11 @@ import { obtenerUsuarios } from "../../redux/actions/UserAction";
 import statisticChart from "../../assets/svg/statistic_chart.svg";
 
 function Home() {
-  const usuarios = useSelector((state) => state.user.usuarios);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(obtenerUsuarios());
   }, [dispatch]);
-
-  console.log(usuarios);
 
   return (
     <>
@@ -143,7 +140,7 @@ function Home() {
           <AdvancedChart
             widgetProps={{
               width: window.innerWidth > 768 ? 550 : "100vw",
-              height: window.innerWidth < 768 ? 350 : "auto",
+              height: 350,
               hide_side_toolbar: true,
               hide_top_toolbar: true,
               locale: "es",
@@ -177,12 +174,8 @@ function Home() {
                 Registrarse
               </Button>
             </Link>
-            <Link to="/">
-              <Button
-                variant="contained"
-                color="inherit"
-                sx={{ margin: "0 0.5rem" }}
-              >
+            <Link to="/ingresar">
+              <Button variant="outlined" sx={{ margin: "0 0.5rem" }}>
                 Ingresar
               </Button>
             </Link>
