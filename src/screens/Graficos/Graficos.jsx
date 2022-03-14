@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { AdvancedChart } from "react-tradingview-embed";
+import Footer from "../Footer/Footer";
 import Header from "../../components/molecules/Header/Header";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +37,8 @@ function Graficos() {
           range: 1000,
         }}
       />
+
+      <Footer />
     </>
   );
 }

@@ -3,6 +3,7 @@ import "./Operar.css";
 import React, { useEffect, useState } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
+import Footer from "../Footer/Footer";
 import Header from "../../components/molecules/Header/Header";
 import TableAcciones from "../../components/molecules/TableAcciones/TableAcciones";
 import TableCripto from "../../components/molecules/TableCripto/TableCripto";
@@ -40,6 +41,8 @@ function Operar() {
 
         {alignment === "cripto" ? <TableCripto /> : <TableAcciones />}
       </main>
+
+      <Footer />
     </>
   );
 }

@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import DialogConfirmar from "../../components/molecules/Dialog/DialogConfirmar/DialogConfirmar";
+import Footer from "../Footer/Footer";
 import Header from "../../components/molecules/Header/Header";
 import { useNavigate } from "react-router-dom";
 import { usuarioEnSesion } from "../../redux/actions/UserAction";
@@ -90,6 +91,8 @@ function MiCuenta() {
 
         <DialogConfirmar open={open} setOpen={setOpen} />
       </main>
+
+      <Footer />
     </>
   );
 }

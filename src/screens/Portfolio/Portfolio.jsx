@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import DialogIngresarDinero from "../../components/molecules/Dialog/DialogIngresarDinero/DialogIngresarDinero";
 import DialogRetiroDinero from "../../components/molecules/Dialog/DialogRetiroDinero/DialogRetiroDinero";
+import Footer from "../Footer/Footer";
 import Header from "../../components/molecules/Header/Header";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
 import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
@@ -64,6 +65,8 @@ function Portfolio() {
           usuario={usuario}
         />
       </main>
+
+      <Footer />
     </>
   );
 }
