@@ -36,10 +36,6 @@
   justify-content: space-around;
 }
 
-/* .section_2 h3 {
-  text-align: center;
-} */
-
 .section__3 {
   height: 100vh;
   display: flex;
@@ -151,6 +147,10 @@
 @media only screen and (max-width: 768px) {
   .main__home img {
     display: none;
+  }
+
+  .main__home p {
+    text-align: left;
   }
 
   .section__1 h1 {

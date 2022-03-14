@@ -9,16 +9,19 @@ function Footer() {
         *arg.change es un exchange demo. La misma no representa ninguna entidad
         financiera real, ni nada en esta app es una recomendacion de compra.
       </p>
-      <p className="i">
-        Creado por{" "}
-        <a
-          href="https://github.com/franRappazzini"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Francisco Rappazzini
-        </a>
-      </p>
+      <div className="i">
+        <p>
+          Creado por{" "}
+          <a
+            href="https://github.com/franRappazzini"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Francisco Rappazzini
+          </a>
+          .
+        </p>
+      </div>
     </footer>
   );
 }

@@ -9,11 +9,12 @@ footer {
   margin-top: 10px;
 }
 
-.i {
+.i p {
   text-align: center;
 }
 
 .i a {
+  display: inline;
   width: fit-content;
   text-align: center;
   text-decoration: none;
