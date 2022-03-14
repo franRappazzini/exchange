@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
+import Error404 from "./screens/404/Error404";
 import Graficos from "./screens/Graficos/Graficos";
 import Home from "./screens/Home/Home";
 import Ingresar from "./screens/Ingresar/Ingresar";
@@ -38,6 +39,8 @@ function App() {
             <Route path="/graficos" element={<Graficos />} />
 
             <Route path="/mi_cuenta" element={<MiCuenta />} />
+
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </BrowserRouter>
       </Provider>

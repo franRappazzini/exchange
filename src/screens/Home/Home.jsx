@@ -12,7 +12,6 @@ import {
   tabs,
   tabsCrypto,
 } from "../../utils/constants/stockData";
-import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@mui/material";
 import Footer from "../Footer/Footer";
@@ -22,6 +21,7 @@ import creditCard from "../../assets/svg/credit_card.svg";
 import discount from "../../assets/svg/discount.svg";
 import { obtenerUsuarios } from "../../redux/actions/UserAction";
 import statisticChart from "../../assets/svg/statistic_chart.svg";
+import { useDispatch } from "react-redux";
 
 function Home() {
   const dispatch = useDispatch();

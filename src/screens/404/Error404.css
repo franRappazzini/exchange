@@ -1,0 +1,26 @@
+.error_container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-error__container a {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.btn-error__container a {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 840px) {
+  .error_container {
+    flex-direction: column;
+  }
+  .error_container h3,
+  p {
+    text-align: center;
+  }
+}
