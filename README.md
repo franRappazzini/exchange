@@ -1,5 +1,18 @@
 # arg.change app
 
+Exchange de cripto y acciones demo creado con React. 
+
+## Dependencias Utilizadas 🛠️
+
+* React JS
+* Redux
+* Material UI
+* Firebase
+* [API CoinGecko](https://www.coingecko.com/es/api/documentation)
+* [API Financial Modeling Prep](https://site.financialmodelingprep.com/developer/docs/)
+
+👉🏼[Toque para ver proyecto](https://argchange-exchange.vercel.app/)👈🏼
+
 
 # Getting Started with Create React App
 
