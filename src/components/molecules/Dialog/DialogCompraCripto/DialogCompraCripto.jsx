@@ -15,7 +15,7 @@ import { usuarioEnSesion } from "../../../../redux/actions/UserAction";
 export default function DialogCompraCripto({ cripto, open, setOpen }) {
   const [cantidad, setCantidad] = React.useState("");
   const [confirmar, setConfirmar] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  // const [loading, setLoading] = React.useState(false);
   const { id, image, name, symbol, current_price } = cripto;
   const usuario = useSelector((state) => state.user.usuario);
   const { saldo = 0 } = usuario;

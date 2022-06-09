@@ -7,26 +7,29 @@ const COMPRAR_CRIPTO = "COMPRAR_CRIPTO";
 const VENDER_CRIPTO = "VENDER_CRIPTO";
 const OBTENER_CRIPTOS_PORTFOLIO = "OBTENER_CRIPTOS_PORTFOLIO";
 
-// export function obtenerTotalInvertido(criptosPortfolio, cantidad) {
-//   return async (dispatch) => {
-//     const total = [];
+export function obtenerTotalInvertido(criptosPortfolio, cantidad) {
+  return async (dispatch) => {
+    const total = [];
 
-//     criptosPortfolio.length > 0 &&
-//       criptosPortfolio.forEach((cripto) => {
-//         fetch(
-//           `https://api.coingecko.com/api/v3/simple/price?ids=${cripto.id}&vs_currencies=usd`
-//         )
-//           .then((res) => res.json())
-//           .then((data) => total.push(Object.values(data)[0].usd))
-//           .catch((err) => console.log("ERROR: ", err));
-//       });
+    criptosPortfolio.length > 0 &&
+      criptosPortfolio.forEach((cripto) => {
+        fetch(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${cripto.id}&vs_currencies=usd`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("DATAAAA", Object.values(data)[0].usd);
+            total.push(Object.values(data)[0].usd);
+          })
+          .catch((err) => console.log("ERROR: ", err));
+      });
 
-//     await dispatch({
-//       type: OBTENER_TOTAL_INVERTIDO,
-//       total: total,
-//     });
-//   };
-// }
+    await dispatch({
+      type: OBTENER_TOTAL_INVERTIDO,
+      total: total,
+    });
+  };
+}
 
 export function obtenerCriptos(limit) {
   return (dispatch) => {

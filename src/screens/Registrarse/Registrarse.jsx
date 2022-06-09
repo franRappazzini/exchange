@@ -21,6 +21,7 @@ function Registrarse() {
     email: "",
     password: "",
     password2: "",
+    saldo: 0,
     verPassword: false,
   });
   const [open, setOpen] = useState(false);

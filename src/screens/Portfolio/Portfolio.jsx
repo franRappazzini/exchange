@@ -12,6 +12,7 @@ import Footer from "../Footer/Footer";
 import Header from "../../components/molecules/Header/Header";
 import SaldoActual from "../../components/molecules/SaldoActual/SaldoActual";
 import TablePortfolio from "../../components/molecules/TablePortfolio/TablePortfolio";
+import { obtenerTotalInvertido } from "../../redux/actions/ActivosAction";
 import pieChart from "../../assets/svg/Group 1.svg";
 import { usuarioEnSesion } from "../../redux/actions/UserAction";
 import verificarUsuario from "../../utils/functions/verificarUsuario";
@@ -20,13 +21,19 @@ function Portfolio() {
   const [open, setOpen] = useState(false);
   const [openRetiro, setOpenRetiro] = useState(false);
   const usuario = useSelector((state) => state.user.usuario);
+  const totalInvertido = useSelector((state) => state.activos.totalInvertido);
+  const criptos = useSelector((state) => state.activos.criptos);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  console.log("AAAAAAAA", totalInvertido);
+  console.log("BBBBBBBB", criptos);
+
   useEffect(() => {
     dispatch(usuarioEnSesion());
+    dispatch(obtenerTotalInvertido(criptos));
     verificarUsuario(navigate);
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, criptos]);
 
   return (
     <>
@@ -51,7 +58,7 @@ function Portfolio() {
           </Button>
         </ButtonGroup>
 
-        <SaldoActual dineroDisponible={usuario.saldo} inversiones={100000} />
+        <SaldoActual dineroDisponible={usuario.saldo} inversiones={0} />
 
         <section className="portfolio__container">
           <TablePortfolio />
