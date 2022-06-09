@@ -23,11 +23,6 @@ const ActivosReducer = (state = initialState, action) => {
         ...state,
         criptos: action.criptos,
       };
-    case "OBTENER_ACCIONES_PORTFOLIO":
-      return {
-        ...state,
-        acciones: action.acciones,
-      };
     default:
       return state;
   }

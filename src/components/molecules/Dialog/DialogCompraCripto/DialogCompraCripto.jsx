@@ -30,7 +30,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
   };
 
   function handleConfirmar() {
-    setLoading(true);
+    // setLoading(true);
     setConfirmar(false);
     handleClose();
     dispatch(
@@ -42,9 +42,9 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
         cantidad
       )
     );
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 2000);
   }
 
   return (
@@ -144,7 +144,7 @@ export default function DialogCompraCripto({ cripto, open, setOpen }) {
                 variant="contained"
                 color="success"
                 onClick={handleConfirmar}
-                loading={loading}
+                // loading={loading}
               >
                 Confirmar
               </LoadingButton>
